@@ -1,15 +1,9 @@
-import logo from '../images/header-logo.svg';
+import Header from './Header';
 
 function App() {
   return (
-    <body class="page">
-      <header class="header">
-        <img
-          src={logo}
-          alt="логотип Место"
-          class="header__logo"
-        />
-      </header>
+    <body>
+      <Header />
       <main class="content">
         <section class="profile">
           <button class="profile__avatar-btn"></button>
