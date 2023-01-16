@@ -1,41 +1,14 @@
 import Header from './Header';
+import Main from './Main';
 
 function App() {
   return (
-    <body>
+    <>
       <Header />
-      <main class="content">
-        <section class="profile">
-          <button class="profile__avatar-btn"></button>
-          <img class="profile__image" />
-          <div class="profile__container">
-            <div class="profile__info">
-              <h1 class="profile__name"></h1>
-              <p class="profile__job"></p>
-            </div>
-            <button
-              class="profile__edit"
-              type="button"
-              aria-label="кнопка редактирования профиля"
-            ></button>
-          </div>
-          <button
-            class="profile__add-btn"
-            type="button"
-            aria-label="кнопка добавления фотографии"
-          ></button>
-        </section>
-
-        <section
-          class="cards"
-          aria-label="карточки с фотографиями"
-        ></section>
-      </main>
-
+      <Main />
       <footer class="footer">
         <p class="footer__copyright">&copy; 2022 Роман Фролов</p>
       </footer>
-
       <div class="popup popup_type_edit">
         <div class="popup__container">
           <button
@@ -86,7 +59,6 @@ function App() {
           </form>
         </div>
       </div>
-
       <div class="popup popup_type_add">
         <div class="popup__container">
           <button
@@ -135,7 +107,6 @@ function App() {
           </form>
         </div>
       </div>
-
       <div class="popup popup_type_picture">
         <figure class="popup__image-container">
           <button
@@ -151,7 +122,6 @@ function App() {
           <figcaption class="popup__image-caption">El Matador beach</figcaption>
         </figure>
       </div>
-
       <div class="popup popup_type_confirm">
         <div class="popup__container">
           <h2 class="popup__title">Вы уверены?</h2>
@@ -174,7 +144,6 @@ function App() {
           </form>
         </div>
       </div>
-
       <div class="popup popup_type_avatar">
         <div class="popup__container">
           <button
@@ -208,7 +177,6 @@ function App() {
           </form>
         </div>
       </div>
-
       <template class="card-template">
         <article class="card">
           <img class="card__image" />
@@ -230,7 +198,7 @@ function App() {
           </div>
         </article>
       </template>
-    </body>
+    </>
   );
 }
 
