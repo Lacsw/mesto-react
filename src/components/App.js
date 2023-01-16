@@ -1,3 +1,4 @@
+import Footer from './Footer';
 import Header from './Header';
 import Main from './Main';
 
@@ -6,9 +7,7 @@ function App() {
     <>
       <Header />
       <Main />
-      <footer class="footer">
-        <p class="footer__copyright">&copy; 2022 Роман Фролов</p>
-      </footer>
+      <Footer />
       <div class="popup popup_type_edit">
         <div class="popup__container">
           <button
