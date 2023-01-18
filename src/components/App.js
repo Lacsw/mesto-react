@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 import Footer from './Footer';
 import Header from './Header';
 import Main from './Main';
@@ -5,15 +7,36 @@ import PopupWithForm from './PopupWithForm';
 import PopupWithImage from './PopupWithImage';
 
 function App() {
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
+
+  function handleEditAvatarClick() {
+    setEditAvatarPopupOpen(true);
+  }
+
+  function handleEditProfileClick() {
+    setEditProfilePopupOpen(true);
+  }
+
+  function handleAddPlaceClick() {
+    setAddPlacePopupOpen(true);
+  }
+
   return (
     <>
       <Header />
-      <Main />
+      <Main
+        onEditProfile={handleEditProfileClick}
+        onAddPlace={handleAddPlaceClick}
+        onEditAvatar={handleEditAvatarClick}
+      />
       <Footer />
       <PopupWithForm
         name="edit"
         title="Редактировать профиль"
         submitBtnText="Сохранить"
+        isOpen={isEditProfilePopupOpen}
         children={
           <>
             <fieldset class="popup__set">
@@ -52,6 +75,7 @@ function App() {
         name="add"
         title="Новое место"
         submitBtnText="Создать"
+        isOpen={isAddPlacePopupOpen}
         children={
           <>
             <fieldset class="popup__set">
@@ -94,6 +118,7 @@ function App() {
         name="avatar"
         title="Обновить аватар"
         submitBtnText="Сохранить"
+        isOpen={isEditAvatarPopupOpen}
         children={
           <>
             <label class="popup__field">
