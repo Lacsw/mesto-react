@@ -1,26 +1,26 @@
 function Main(props) {
   return (
-    <main class="content">
-      <section class="profile">
+    <main className="content">
+      <section className="profile">
         <button
-          class="profile__avatar-btn"
+          className="profile__avatar-btn"
           onClick={props.onEditAvatar}
         ></button>
-        <img class="profile__image" />
-        <div class="profile__container">
-          <div class="profile__info">
-            <h1 class="profile__name"></h1>
-            <p class="profile__job"></p>
+        <img className="profile__image" />
+        <div className="profile__container">
+          <div className="profile__info">
+            <h1 className="profile__name"></h1>
+            <p className="profile__job"></p>
           </div>
           <button
-            class="profile__edit"
+            className="profile__edit"
             type="button"
             aria-label="кнопка редактирования профиля"
             onClick={props.onEditProfile}
           ></button>
         </div>
         <button
-          class="profile__add-btn"
+          className="profile__add-btn"
           type="button"
           aria-label="кнопка добавления фотографии"
           onClick={props.onAddPlace}
@@ -28,7 +28,7 @@ function Main(props) {
       </section>
 
       <section
-        class="cards"
+        className="cards"
         aria-label="карточки с фотографиями"
       ></section>
     </main>

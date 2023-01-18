@@ -21,7 +21,7 @@ function PopupWithForm(props) {
           {props.children}
 
           <button
-            class="popup__submit-btn"
+            className="popup__submit-btn"
             type="submit"
           >
             {props.submitBtnText}
