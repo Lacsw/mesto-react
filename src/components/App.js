@@ -2,6 +2,7 @@ import Footer from './Footer';
 import Header from './Header';
 import Main from './Main';
 import PopupWithForm from './PopupWithForm';
+import PopupWithImage from './PopupWithImage';
 
 function App() {
   return (
@@ -110,21 +111,7 @@ function App() {
         }
       />
 
-      <div class="popup popup_type_picture">
-        <figure class="popup__image-container">
-          <button
-            class="popup__close-btn"
-            type="button"
-            aria-label="кнопка закрытия попапа"
-          ></button>
-          <img
-            class="popup__image"
-            src="<%=require('./images/el-matador-beach.jpeg')%>"
-            alt="увеличенное изображение"
-          />
-          <figcaption class="popup__image-caption">El Matador beach</figcaption>
-        </figure>
-      </div>
+      <PopupWithImage />
 
       <template class="card-template">
         <article class="card">
