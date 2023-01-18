@@ -1,4 +1,20 @@
+import { useEffect, useState } from 'react';
+
+import api from '../utils/api';
+
 function Main(props) {
+  const [userName, setUserName] = useState('');
+  const [userDescription, setUserDescription] = useState('');
+  const [userAvatar, setUserAvatar] = useState('');
+
+  useEffect(() => {
+    api.getUserInfo().then((userData) => {
+      setUserName(userData.name);
+      setUserDescription(userData.about);
+      setUserAvatar(userData.avatar);
+    });
+  });
+
   return (
     <main className="content">
       <section className="profile">
@@ -6,11 +22,14 @@ function Main(props) {
           className="profile__avatar-btn"
           onClick={props.onEditAvatar}
         ></button>
-        <img className="profile__image" />
+        <img
+          className="profile__image"
+          style={{ backgroundImage: `url(${userAvatar})` }}
+        />
         <div className="profile__container">
           <div className="profile__info">
-            <h1 className="profile__name"></h1>
-            <p className="profile__job"></p>
+            <h1 className="profile__name">{userName}</h1>
+            <p className="profile__job">{userDescription}</p>
           </div>
           <button
             className="profile__edit"
