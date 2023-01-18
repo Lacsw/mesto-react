@@ -23,6 +23,12 @@ function App() {
     setAddPlacePopupOpen(true);
   }
 
+  function closeAllPopups() {
+    setEditAvatarPopupOpen(false);
+    setEditProfilePopupOpen(false);
+    setAddPlacePopupOpen(false);
+  }
+
   return (
     <>
       <Header />
@@ -37,6 +43,7 @@ function App() {
         title="Редактировать профиль"
         submitBtnText="Сохранить"
         isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
         children={
           <>
             <fieldset class="popup__set">
@@ -76,6 +83,7 @@ function App() {
         title="Новое место"
         submitBtnText="Создать"
         isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
         children={
           <>
             <fieldset class="popup__set">
@@ -112,6 +120,7 @@ function App() {
         name="confirm"
         title="Вы уверенны?"
         submitBtnText="Да"
+        onClose={closeAllPopups}
       />
 
       <PopupWithForm
@@ -119,6 +128,7 @@ function App() {
         title="Обновить аватар"
         submitBtnText="Сохранить"
         isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
         children={
           <>
             <label class="popup__field">
