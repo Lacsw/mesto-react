@@ -1,6 +1,7 @@
 import Footer from './Footer';
 import Header from './Header';
 import Main from './Main';
+import PopupWithForm from './PopupWithForm';
 
 function App() {
   return (
@@ -8,19 +9,12 @@ function App() {
       <Header />
       <Main />
       <Footer />
-      <div class="popup popup_type_edit">
-        <div class="popup__container">
-          <button
-            class="popup__close-btn"
-            type="button"
-            aria-label="кнопка закрытия попапа"
-          ></button>
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <form
-            class="popup__form popup__edit-form"
-            name="edit-form"
-            novalidate
-          >
+      <PopupWithForm
+        name="edit"
+        title="Редактировать профиль"
+        submitBtnText="Сохранить"
+        children={
+          <>
             <fieldset class="popup__set">
               <label class="popup__field">
                 <input
@@ -49,28 +43,16 @@ function App() {
                 <span class="popup__input-error job-input-error"></span>
               </label>
             </fieldset>
-            <button
-              class="popup__submit-btn"
-              type="submit"
-            >
-              Сохранить
-            </button>
-          </form>
-        </div>
-      </div>
-      <div class="popup popup_type_add">
-        <div class="popup__container">
-          <button
-            class="popup__close-btn"
-            type="button"
-            aria-label="кнопка закрытия попапа"
-          ></button>
-          <h2 class="popup__title">Новое место</h2>
-          <form
-            class="popup__form popup__add-form"
-            name="add-form"
-            novalidate
-          >
+          </>
+        }
+      />
+
+      <PopupWithForm
+        name="add"
+        title="Новое место"
+        submitBtnText="Создать"
+        children={
+          <>
             <fieldset class="popup__set">
               <label class="popup__field">
                 <input
@@ -97,15 +79,37 @@ function App() {
                 <span class="popup__input-error link-input-error"></span>
               </label>
             </fieldset>
-            <button
-              class="popup__submit-btn"
-              type="submit"
-            >
-              Создать
-            </button>
-          </form>
-        </div>
-      </div>
+          </>
+        }
+      />
+
+      <PopupWithForm
+        name="confirm"
+        title="Вы уверенны?"
+        submitBtnText="Да"
+      />
+
+      <PopupWithForm
+        name="avatar"
+        title="Обновить аватар"
+        submitBtnText="Сохранить"
+        children={
+          <>
+            <label class="popup__field">
+              <input
+                class="popup__input popup__input_type_avatar"
+                type="url"
+                name="avatar"
+                placeholder="Ссылка на новый аватар"
+                id="avatar-link-input"
+                required
+              />
+              <span class="popup__input-error avatar-link-input-error"></span>
+            </label>
+          </>
+        }
+      />
+
       <div class="popup popup_type_picture">
         <figure class="popup__image-container">
           <button
@@ -121,61 +125,7 @@ function App() {
           <figcaption class="popup__image-caption">El Matador beach</figcaption>
         </figure>
       </div>
-      <div class="popup popup_type_confirm">
-        <div class="popup__container">
-          <h2 class="popup__title">Вы уверены?</h2>
-          <button
-            class="popup__close-btn"
-            type="button"
-            aria-label="кнопка закрытия попапа"
-          ></button>
-          <form
-            class="popup__form popup__confirm-form"
-            name="confirm-form"
-            novalidate
-          >
-            <button
-              class="popup__submit-btn"
-              type="submit"
-            >
-              Да
-            </button>
-          </form>
-        </div>
-      </div>
-      <div class="popup popup_type_avatar">
-        <div class="popup__container">
-          <button
-            class="popup__close-btn"
-            type="button"
-            aria-label="кнопка закрытия попапа"
-          ></button>
-          <h2 class="popup__title">Обновить аватар</h2>
-          <form
-            class="popup__form popup__avatar-form"
-            name="avatar-form"
-            novalidate
-          >
-            <label class="popup__field">
-              <input
-                class="popup__input popup__input_type_avatar"
-                type="url"
-                name="avatar"
-                placeholder="Ссылка на новый аватар"
-                id="avatar-link-input"
-                required
-              />
-              <span class="popup__input-error avatar-link-input-error"></span>
-            </label>
-            <button
-              class="popup__submit-btn"
-              type="submit"
-            >
-              Сохранить
-            </button>
-          </form>
-        </div>
-      </div>
+
       <template class="card-template">
         <article class="card">
           <img class="card__image" />
