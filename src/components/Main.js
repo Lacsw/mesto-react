@@ -25,6 +25,7 @@ function Main(props) {
         <img
           className="profile__image"
           style={{ backgroundImage: `url(${userAvatar})` }}
+          alt={`фотография ${userName}`}
         />
         <div className="profile__container">
           <div className="profile__info">
