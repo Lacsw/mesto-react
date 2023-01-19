@@ -31,7 +31,7 @@ function Main(props) {
         ></button>
         <img
           className="profile__image"
-          style={{ backgroundImage: `url(${userAvatar})` }}
+          src={userAvatar}
           alt={`фотография ${userName}`}
         />
         <div className="profile__container">
