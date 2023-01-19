@@ -5,7 +5,7 @@ function PopupWithForm(props) {
         props.isOpen && 'popup_opened'
       }`}
     >
-      <div class="popup__container">
+      <div className="popup__container">
         <button
           onClick={props.onClose}
           className="popup__close-btn"
