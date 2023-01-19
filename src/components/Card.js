@@ -1,10 +1,15 @@
 const Card = (props) => {
+  function handleClick() {
+    props.onCardClick(props.card);
+  }
+
   return (
     <article className="card">
       <img
         className="card__image"
         src={props.card.link}
         alt={`Изображение ${props.card.name}`}
+        onClick={handleClick}
       />
       <div className="card__caption">
         <h2 className="card__title">{props.card.name}</h2>
