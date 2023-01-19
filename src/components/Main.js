@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 
 import api from '../utils/api';
+import Card from './Card';
 
 function Main(props) {
   const [userName, setUserName] = useState('');
   const [userDescription, setUserDescription] = useState('');
   const [userAvatar, setUserAvatar] = useState('');
+
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     api.getUserInfo().then((userData) => {
@@ -13,7 +16,11 @@ function Main(props) {
       setUserDescription(userData.about);
       setUserAvatar(userData.avatar);
     });
-  });
+
+    api.getInitialCards().then((cards) => {
+      setCards(cards);
+    });
+  }, []);
 
   return (
     <main className="content">
@@ -50,7 +57,14 @@ function Main(props) {
       <section
         className="cards"
         aria-label="карточки с фотографиями"
-      ></section>
+      >
+        {cards.map((card) => (
+          <Card
+            key={card._id}
+            card={card}
+          />
+        ))}
+      </section>
     </main>
   );
 }

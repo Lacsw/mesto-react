@@ -147,28 +147,6 @@ function App() {
       />
 
       <PopupWithImage />
-
-      <template className="card-template">
-        <article className="card">
-          <img className="card__image" />
-          <div className="card__caption">
-            <h2 className="card__title"></h2>
-            <div className="card__like-container">
-              <button
-                className="card__like-btn"
-                type="button"
-                aria-label="кнопка лайк"
-              ></button>
-              <span className="card__like-counter"></span>
-            </div>
-            <button
-              className="card__remove-btn"
-              type="button"
-              aria-label="кнопка удаления"
-            ></button>
-          </div>
-        </article>
-      </template>
     </>
   );
 }
