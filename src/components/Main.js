@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import api from '../utils/api';
 import Card from './Card';
 
-function Main(props) {
+function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
   const [userName, setUserName] = useState('');
   const [userDescription, setUserDescription] = useState('');
   const [userAvatar, setUserAvatar] = useState('');
@@ -27,7 +27,7 @@ function Main(props) {
       <section className="profile">
         <button
           className="profile__avatar-btn"
-          onClick={props.onEditAvatar}
+          onClick={onEditAvatar}
         ></button>
         <img
           className="profile__image"
@@ -43,14 +43,14 @@ function Main(props) {
             className="profile__edit"
             type="button"
             aria-label="кнопка редактирования профиля"
-            onClick={props.onEditProfile}
+            onClick={onEditProfile}
           ></button>
         </div>
         <button
           className="profile__add-btn"
           type="button"
           aria-label="кнопка добавления фотографии"
-          onClick={props.onAddPlace}
+          onClick={onAddPlace}
         ></button>
       </section>
 
@@ -62,7 +62,7 @@ function Main(props) {
           <Card
             key={card._id}
             card={card}
-            onCardClick={props.onCardClick}
+            onCardClick={onCardClick}
           />
         ))}
       </section>

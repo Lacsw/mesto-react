@@ -1,25 +1,25 @@
-const Card = (props) => {
+const Card = ({ card, onCardClick }) => {
   function handleClick() {
-    props.onCardClick(props.card);
+    onCardClick(card);
   }
 
   return (
     <article className="card">
       <img
         className="card__image"
-        src={props.card.link}
-        alt={`Изображение ${props.card.name}`}
+        src={card.link}
+        alt={`Изображение ${card.name}`}
         onClick={handleClick}
       />
       <div className="card__caption">
-        <h2 className="card__title">{props.card.name}</h2>
+        <h2 className="card__title">{card.name}</h2>
         <div className="card__like-container">
           <button
             className="card__like-btn"
             type="button"
             aria-label="кнопка лайк"
           ></button>
-          <span className="card__like-counter">{props.card.likes.length}</span>
+          <span className="card__like-counter">{card.likes.length}</span>
         </div>
         <button
           className="card__remove-btn"
