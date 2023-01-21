@@ -2,7 +2,7 @@ function ImagePopup({ card, onClose }) {
   return (
     <div
       className={`popup popup_type_picture ${
-        Object.keys(card).length !== 0 && 'popup_opened'
+        card.link && 'popup_opened'
       }`}
     >
       <figure className="popup__image-container">
