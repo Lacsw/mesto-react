@@ -1,6 +1,17 @@
+import { useContext } from 'react';
+
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+
 const Card = ({ card, onCardClick }) => {
+  const currentUser = useContext(CurrentUserContext);
+  const isOwn = card.owner._id === currentUser._id;
+
   function handleClick() {
     onCardClick(card);
+  }
+
+  function handleDeleteClick() {
+    //функционал удаления карточки
   }
 
   return (
@@ -21,11 +32,14 @@ const Card = ({ card, onCardClick }) => {
           ></button>
           <span className="card__like-counter">{card.likes.length}</span>
         </div>
-        <button
-          className="card__remove-btn"
-          type="button"
-          aria-label="кнопка удаления"
-        ></button>
+        {isOwn && (
+          <button
+            className="card__remove-btn"
+            type="button"
+            aria-label="кнопка удаления"
+            onClick={handleDeleteClick}
+          />
+        )}
       </div>
     </article>
   );
