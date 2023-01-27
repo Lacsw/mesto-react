@@ -5,7 +5,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Card from './Card';
 
 function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
-  const user = useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
 
   const [cards, setCards] = useState([]);
 
@@ -21,13 +21,13 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
         <button className="profile__avatar-btn" onClick={onEditAvatar}></button>
         <img
           className="profile__image"
-          src={user.avatar}
-          alt={`фотография ${user.name}`}
+          src={currentUser.avatar}
+          alt={`фотография ${currentUser.name}`}
         />
         <div className="profile__container">
           <div className="profile__info">
-            <h1 className="profile__name">{user.name}</h1>
-            <p className="profile__job">{user.about}</p>
+            <h1 className="profile__name">{currentUser.name}</h1>
+            <p className="profile__job">{currentUser.about}</p>
           </div>
           <button
             className="profile__edit"
