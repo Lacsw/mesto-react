@@ -4,7 +4,13 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 const Card = ({ card, onCardClick }) => {
   const currentUser = useContext(CurrentUserContext);
+
   const isOwn = card.owner._id === currentUser._id;
+
+  const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  const cardLikeButtonClassName = `card__like-btn ${
+    isLiked && 'card__like-btn_active'
+  }`;
 
   function handleClick() {
     onCardClick(card);
@@ -26,7 +32,7 @@ const Card = ({ card, onCardClick }) => {
         <h2 className="card__title">{card.name}</h2>
         <div className="card__like-container">
           <button
-            className="card__like-btn"
+            className={cardLikeButtonClassName}
             type="button"
             aria-label="кнопка лайк"
           ></button>
