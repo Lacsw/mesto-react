@@ -60,16 +60,11 @@ class Api {
     return this._checkResponse(response);
   }
 
-  async toggleLikes(data, isLike) {
-    const response = !isLike
-      ? await fetch(`${this._baseUsl}/cards/${data._id}/likes`, {
-          method: 'PUT',
-          headers: this._headers,
-        })
-      : await fetch(`${this._baseUsl}/cards/${data._id}/likes`, {
-          method: 'DELETE',
-          headers: this._headers,
-        });
+  async toggleLikes(cardId, isLike) {
+    const response = await fetch(`${this._baseUsl}/cards/${cardId}/likes`, {
+      method: !isLike ? 'PUT' : 'DELETE',
+      headers: this._headers,
+    });
     return this._checkResponse(response);
   }
 
