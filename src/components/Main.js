@@ -15,6 +15,16 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
     });
   }, []);
 
+  function handleCardLike(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api.toggleLikes(card, isLiked).then((newCard) => {
+      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+    });
+  }
+
   return (
     <main className="content">
       <section className="profile">
@@ -46,7 +56,12 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
 
       <section className="cards" aria-label="карточки с фотографиями">
         {cards.map((card) => (
-          <Card key={card._id} card={card} onCardClick={onCardClick} />
+          <Card
+            key={card._id}
+            card={card}
+            onCardClick={onCardClick}
+            onCardLike={handleCardLike}
+          />
         ))}
       </section>
     </main>
