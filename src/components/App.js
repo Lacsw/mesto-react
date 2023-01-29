@@ -9,6 +9,7 @@ import ImagePopup from './ImagePopup';
 import api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -53,6 +54,13 @@ function App() {
     });
   }, []);
 
+  function handleUpdateAvatar(newAvatar) {
+    api.updateAvatar(newAvatar).then((userData) => {
+      setCurrentUser(userData);
+      closeAllPopups();
+    });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Header />
@@ -61,6 +69,7 @@ function App() {
         onAddPlace={handleAddPlaceClick}
         onEditAvatar={handleEditAvatarClick}
         onCardClick={handleCardClick}
+        name="place-name"
       />
       <Footer />
 
@@ -68,6 +77,12 @@ function App() {
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
         onUpdateUser={handleUpdateUser}
+      />
+
+      <EditAvatarPopup
+        isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
+        onUpdateAvatar={handleUpdateAvatar}
       />
 
       <PopupWithForm
@@ -82,7 +97,6 @@ function App() {
             <input
               className="popup__input popup__input_type_place-name"
               type="text"
-              name="place-name"
               placeholder="Название"
               minLength="2"
               maxLength="30"
@@ -111,26 +125,6 @@ function App() {
         submitBtnText="Да"
         onClose={closeAllPopups}
       />
-
-      <PopupWithForm
-        name="avatar"
-        title="Обновить аватар"
-        submitBtnText="Сохранить"
-        isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}
-      >
-        <label className="popup__field">
-          <input
-            className="popup__input popup__input_type_avatar"
-            type="url"
-            name="avatar"
-            placeholder="Ссылка на новый аватар"
-            id="avatar-link-input"
-            required
-          />
-          <span className="popup__input-error avatar-link-input-error"></span>
-        </label>
-      </PopupWithForm>
 
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </CurrentUserContext.Provider>
