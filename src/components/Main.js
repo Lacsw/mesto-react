@@ -6,7 +6,6 @@ import Card from './Card';
 
 function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
   const currentUser = useContext(CurrentUserContext);
-
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -18,10 +17,15 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.toggleLikes(card._id, isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+      setCards((cards) => cards.map((c) => (c._id === card._id ? newCard : c)));
+    });
+  }
+
+  function handleCardDelete(card) {
+    api.deleteCard(card).then(() => {
+      setCards((cards) => cards.filter((c) => (c._id !== card._id)));
     });
   }
 
@@ -61,6 +65,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
             card={card}
             onCardClick={onCardClick}
             onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
           />
         ))}
       </section>

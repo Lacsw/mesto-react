@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-const Card = ({ card, onCardClick, onCardLike }) => {
+const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
   const currentUser = useContext(CurrentUserContext);
 
   const isOwn = card.owner._id === currentUser._id;
@@ -21,7 +21,7 @@ const Card = ({ card, onCardClick, onCardLike }) => {
   }
 
   function handleDeleteClick() {
-    //функционал удаления карточки
+    onCardDelete(card);
   }
 
   return (
