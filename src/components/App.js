@@ -18,6 +18,7 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
 
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true);
@@ -53,6 +54,9 @@ function App() {
     api.getUserInfo().then((userData) => {
       setCurrentUser(userData);
     });
+    api.getInitialCards().then((cards) => {
+      setCards(cards);
+    });
   }, []);
 
   function handleUpdateAvatar(newAvatar) {
@@ -63,14 +67,6 @@ function App() {
   }
 
   //Действия с карточками
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    api.getInitialCards().then((cards) => {
-      setCards(cards);
-    });
-  }, []);
-
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
