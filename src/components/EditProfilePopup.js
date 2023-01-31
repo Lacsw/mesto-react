@@ -23,10 +23,10 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
       about: description,
     });
   };
-
+                 
   useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
+    setName(currentUser.name ?? '');                    
+    setDescription(currentUser.about ?? '');
   }, [currentUser]);
 
   return (
