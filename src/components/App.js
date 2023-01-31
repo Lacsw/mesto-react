@@ -44,26 +44,47 @@ function App() {
   }
 
   function handleUpdateUser(userInfo) {
-    api.setUserInfo(userInfo).then((newUserInfo) => {
-      setCurrentUser(newUserInfo);
-      closeAllPopups();
-    });
+    api
+      .setUserInfo(userInfo)
+      .then((newUserInfo) => {
+        setCurrentUser(newUserInfo);
+        closeAllPopups();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   useEffect(() => {
-    api.getUserInfo().then((userData) => {
-      setCurrentUser(userData);
-    });
-    api.getInitialCards().then((cards) => {
-      setCards(cards);
-    });
+    api
+      .getUserInfo()
+      .then((userData) => {
+        setCurrentUser(userData);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    api
+      .getInitialCards()
+      .then((cards) => {
+        setCards(cards);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }, []);
 
   function handleUpdateAvatar(newAvatar) {
-    api.updateAvatar(newAvatar).then((userData) => {
-      setCurrentUser(userData);
-      closeAllPopups();
-    });
+    api
+      .updateAvatar(newAvatar)
+      .then((userData) => {
+        setCurrentUser(userData);
+        closeAllPopups();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   //Действия с карточками
@@ -71,22 +92,39 @@ function App() {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.toggleLikes(card._id, isLiked).then((newCard) => {
-      setCards((cards) => cards.map((c) => (c._id === card._id ? newCard : c)));
-    });
+    api
+      .toggleLikes(card._id, isLiked)
+      .then((newCard) => {
+        setCards((cards) =>
+          cards.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   function handleCardDelete(card) {
-    api.deleteCard(card).then(() => {
-      setCards((cards) => cards.filter((c) => c._id !== card._id));
-    });
+    api
+      .deleteCard(card)
+      .then(() => {
+        setCards((cards) => cards.filter((c) => c._id !== card._id));
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   const handleAddPlaceSubmit = (card) => {
-    api.addNewCard(card).then((newCard) => {
-      setCards([newCard, ...cards]);
-      closeAllPopups();
-    });
+    api
+      .addNewCard(card)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
