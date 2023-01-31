@@ -23,56 +23,54 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
       about: description,
     });
   };
-                 
+
   useEffect(() => {
-    setName(currentUser.name ?? '');                    
+    setName(currentUser.name ?? '');
     setDescription(currentUser.about ?? '');
   }, [currentUser, isOpen]);
 
   return (
-    <>
-      <PopupWithForm
-        name="edit"
-        title="Редактировать профиль"
-        submitBtnText="Сохранить"
-        isOpen={isOpen}
-        onClose={onClose}
-        onSubmit={handleSubmit}
-      >
-        <fieldset className="popup__set">
-          <label className="popup__field">
-            <input
-              className="popup__input popup__input_type_name"
-              type="text"
-              name="name"
-              placeholder="Укажите Ваше имя"
-              id="name-input"
-              minLength="2"
-              maxLength="40"
-              required
-              value={name}
-              onChange={handleNameChange}
-            />
-            <span className="popup__input-error name-input-error"></span>
-          </label>
-          <label className="popup__field">
-            <input
-              className="popup__input popup__input_type_job"
-              type="text"
-              name="about"
-              placeholder="Укажите Вашу профессию"
-              id="job-input"
-              minLength="2"
-              maxLength="200"
-              required
-              value={description}
-              onChange={handleDescChange}
-            />
-            <span className="popup__input-error job-input-error"></span>
-          </label>
-        </fieldset>
-      </PopupWithForm>
-    </>
+    <PopupWithForm
+      name="edit"
+      title="Редактировать профиль"
+      submitBtnText="Сохранить"
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+    >
+      <fieldset className="popup__set">
+        <label className="popup__field">
+          <input
+            className="popup__input popup__input_type_name"
+            type="text"
+            name="name"
+            placeholder="Укажите Ваше имя"
+            id="name-input"
+            minLength="2"
+            maxLength="40"
+            required
+            value={name}
+            onChange={handleNameChange}
+          />
+          <span className="popup__input-error name-input-error"></span>
+        </label>
+        <label className="popup__field">
+          <input
+            className="popup__input popup__input_type_job"
+            type="text"
+            name="about"
+            placeholder="Укажите Вашу профессию"
+            id="job-input"
+            minLength="2"
+            maxLength="200"
+            required
+            value={description}
+            onChange={handleDescChange}
+          />
+          <span className="popup__input-error job-input-error"></span>
+        </label>
+      </fieldset>
+    </PopupWithForm>
   );
 };
 
