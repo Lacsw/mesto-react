@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Footer from './Footer';
 import Header from './Header';
@@ -13,7 +13,12 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ConfirmDeletePopup from './ConfirmDeletePopup';
 
-import { setCards1, likeCard } from '../store/reducers/cardsSlice';
+import {
+  setCards,
+  likeCard,
+  addCard,
+  removeCard,
+} from '../store/reducers/cardsSlice';
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -23,7 +28,6 @@ function App() {
   const [deletedCard, setDeletedCard] = useState({});
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
-  const [cards, setCards] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -77,11 +81,13 @@ function App() {
       .catch((e) => {
         console.log(e);
       });
+  }, []);
 
+  useEffect(() => {
     api
       .getInitialCards()
       .then((cards) => {
-        dispatch(setCards1(cards));
+        dispatch(setCards(cards));
       })
       .catch((e) => {
         console.log(e);
@@ -116,8 +122,8 @@ function App() {
   function handleCardDeleteSubmit(card) {
     api
       .deleteCard(card)
-      .then(() => {
-        setCards((cards) => cards.filter((c) => c._id !== card._id));
+      .then((newCard) => {
+        dispatch(removeCard(newCard));
         closeAllPopups();
       })
       .catch((e) => {
@@ -129,7 +135,7 @@ function App() {
     api
       .addNewCard(card)
       .then((newCard) => {
-        setCards([newCard, ...cards]);
+        dispatch(addCard(newCard));
         closeAllPopups();
       })
       .catch((e) => {
