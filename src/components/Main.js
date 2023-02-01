@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Card from './Card';
@@ -8,11 +9,12 @@ function Main({
   onEditProfile,
   onAddPlace,
   onCardClick,
-  cards,
+  // cards,
   onCardLike,
   onCardDelete,
 }) {
   const currentUser = useContext(CurrentUserContext);
+  const cards = useSelector((state) => state.cards.cards);
 
   return (
     <main className="content">
