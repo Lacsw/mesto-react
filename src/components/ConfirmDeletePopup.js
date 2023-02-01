@@ -4,7 +4,6 @@ const ConfirmDeletePopup = ({isOpen, onClose, onCardDelete, card}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onCardDelete(card);
-    console.log(card);
   }
 
   return (

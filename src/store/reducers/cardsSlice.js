@@ -12,10 +12,10 @@ const cardsSlice = createSlice({
       state.cards = action.payload;
     },
     addCard: (state, action) => {
-      state.cards.push(action.payload);
+      state.cards.unshift(action.payload);
     },
     removeCard: (state, action) => {
-      state.cards = state.cards.filter((card) => card.id !== action.payload);
+      state.cards = state.cards.filter((card) => card._id !== action.payload);
     },
     likeCard: (state, action) => {
       state.cards = state.cards.map((c) =>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import Footer from './Footer';
 import Header from './Header';
@@ -120,10 +120,12 @@ function App() {
       });
   }
   function handleCardDeleteSubmit(card) {
+    const cardId = card._id;
+
     api
       .deleteCard(card)
-      .then((newCard) => {
-        dispatch(removeCard(newCard));
+      .then(() => {
+        dispatch(removeCard(cardId));
         closeAllPopups();
       })
       .catch((e) => {
