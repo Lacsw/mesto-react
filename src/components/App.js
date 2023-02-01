@@ -13,7 +13,7 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ConfirmDeletePopup from './ConfirmDeletePopup';
 
-import { addCard, likeCard } from '../store/reducers/cardsSlice';
+import { setCards1, likeCard } from '../store/reducers/cardsSlice';
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -81,9 +81,7 @@ function App() {
     api
       .getInitialCards()
       .then((cards) => {
-        cards.forEach((card) => {
-          dispatch(addCard(card));
-        });
+        dispatch(setCards1(cards));
       })
       .catch((e) => {
         console.log(e);
@@ -110,10 +108,6 @@ function App() {
       .toggleLikes(card._id, isLiked)
       .then((newCard) => {
         dispatch(likeCard(newCard));
-
-        // setCards((cards) =>
-        //   cards.map((c) => (c._id === card._id ? newCard : c))
-        // );
       })
       .catch((e) => {
         console.log(e);
@@ -152,7 +146,6 @@ function App() {
         onEditAvatar={handleEditAvatarClick}
         onCardClick={handleCardClick}
         name="place-name"
-        // cards={cards}
         onCardLike={handleCardLike}
         onCardDelete={handleRemoveCardBtnClick}
       />
