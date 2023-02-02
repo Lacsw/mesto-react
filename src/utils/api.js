@@ -52,8 +52,8 @@ class Api {
     return this._checkResponse(response);
   }
 
-  async deleteCard(data) {
-    const response = await fetch(`${this._baseUsl}/cards/${data._id}`, {
+  async deleteCard(cardId) {
+    const response = await fetch(`${this._baseUsl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers,
     });

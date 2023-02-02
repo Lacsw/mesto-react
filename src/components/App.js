@@ -107,7 +107,6 @@ function App() {
   }
 
   //Действия с карточками
-
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     api
@@ -123,7 +122,7 @@ function App() {
     const cardId = card._id;
 
     api
-      .deleteCard(card)
+      .deleteCard(cardId)
       .then(() => {
         dispatch(removeCard(cardId));
         closeAllPopups();
