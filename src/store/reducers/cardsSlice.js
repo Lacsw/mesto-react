@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import api from '../../utils/api';
+
 const initialState = {
   cards: [],
 };
@@ -24,6 +26,15 @@ const cardsSlice = createSlice({
     },
   },
 });
+
+export const addCardThunk = (card) => async (dispatch) => {
+  try {
+    const newCard = await api.addNewCard(card);
+    dispatch(addCard(newCard));
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const { setCards, addCard, removeCard, likeCard } = cardsSlice.actions;
 export default cardsSlice.reducer;

@@ -16,8 +16,8 @@ import ConfirmDeletePopup from './ConfirmDeletePopup';
 import {
   setCards,
   likeCard,
-  addCard,
   removeCard,
+  addCardThunk,
 } from '../store/reducers/cardsSlice';
 
 function App() {
@@ -118,30 +118,21 @@ function App() {
         console.log(e);
       });
   }
-  function handleCardDeleteSubmit(card) {
-    const cardId = card._id;
+  async function handleCardDeleteSubmit(card) {
+    try {
+      const cardId = card._id;
 
-    api
-      .deleteCard(cardId)
-      .then(() => {
-        dispatch(removeCard(cardId));
-        closeAllPopups();
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+      await api.deleteCard(cardId);
+      dispatch(removeCard(cardId));
+      closeAllPopups();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const handleAddPlaceSubmit = (card) => {
-    api
-      .addNewCard(card)
-      .then((newCard) => {
-        dispatch(addCard(newCard));
-        closeAllPopups();
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    dispatch(addCardThunk(card));
+    closeAllPopups();
   };
 
   return (
