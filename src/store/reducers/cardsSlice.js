@@ -36,5 +36,14 @@ export const addCardThunk = (card) => async (dispatch) => {
   }
 };
 
+export const removeCardThunk = (cardId) => async (dispatch) => {
+  try {
+    api.deleteCard(cardId);
+    dispatch(removeCard(cardId));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const { setCards, addCard, removeCard, likeCard } = cardsSlice.actions;
 export default cardsSlice.reducer;
