@@ -14,7 +14,7 @@ import AddPlacePopup from './AddPlacePopup';
 import ConfirmDeletePopup from './ConfirmDeletePopup';
 
 import {
-  setCards,
+  setCardsThunk,
   likeCardThunk,
   addCardThunk,
   removeCardThunk,
@@ -83,17 +83,6 @@ function App() {
       });
   }, []);
 
-  useEffect(() => {
-    api
-      .getInitialCards()
-      .then((cards) => {
-        dispatch(setCards(cards));
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, [dispatch]);
-
   function handleUpdateAvatar(newAvatar) {
     api
       .updateAvatar(newAvatar)
@@ -107,6 +96,11 @@ function App() {
   }
 
   //Действия с карточками
+
+  useEffect(() => {
+    dispatch(setCardsThunk());
+  }, [dispatch]);
+
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     dispatch(likeCardThunk(card, isLiked));
