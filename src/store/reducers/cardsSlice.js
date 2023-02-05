@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import api from '../../utils/api';
+
 const initialState = {
   cards: [],
 };
@@ -25,49 +27,25 @@ const cardsSlice = createSlice({
   },
 });
 
-export const setCardsThunk =
-  () => async (dispatch, getState, extraArgument) => {
-    const { api } = extraArgument;
-    try {
-      const initialCards = await api.getInitialCards();
-      dispatch(setCards(initialCards));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export const setCardsThunk = () => async (dispatch) => {
+  const initialCards = await api.getInitialCards();
+  dispatch(setCards(initialCards));
+};
 
-export const addCardThunk =
-  (card) => async (dispatch, getState, extraArgument) => {
-    const { api } = extraArgument;
-    try {
-      const newCard = await api.addNewCard(card);
-      dispatch(addCard(newCard));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export const addCardThunk = (card) => async (dispatch) => {
+  const newCard = await api.addNewCard(card);
+  dispatch(addCard(newCard));
+};
 
-export const removeCardThunk =
-  (cardId) => async (dispatch, getState, extraArgument) => {
-    const { api } = extraArgument;
-    try {
-      api.deleteCard(cardId);
-      dispatch(removeCard(cardId));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export const removeCardThunk = (cardId) => async (dispatch) => {
+  api.deleteCard(cardId);
+  dispatch(removeCard(cardId));
+};
 
-export const likeCardThunk =
-  (card, isLiked) => async (dispatch, getState, extraArgument) => {
-    const { api } = extraArgument;
-    try {
-      const newCard = await api.toggleLikes(card._id, isLiked);
-      dispatch(likeCard(newCard));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export const likeCardThunk = (card, isLiked) => async (dispatch) => {
+  const newCard = await api.toggleLikes(card._id, isLiked);
+  dispatch(likeCard(newCard));
+};
 
 export const { setCards, addCard, removeCard, likeCard } = cardsSlice.actions;
 export default cardsSlice.reducer;
