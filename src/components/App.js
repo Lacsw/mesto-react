@@ -15,7 +15,7 @@ import ConfirmDeletePopup from './ConfirmDeletePopup';
 
 import {
   setCards,
-  likeCard,
+  likeCardThunk,
   addCardThunk,
   removeCardThunk,
 } from '../store/reducers/cardsSlice';
@@ -109,14 +109,7 @@ function App() {
   //Действия с карточками
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    api
-      .toggleLikes(card._id, isLiked)
-      .then((newCard) => {
-        dispatch(likeCard(newCard));
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    dispatch(likeCardThunk(card, isLiked));
   }
 
   const handleCardDeleteSubmit = (card) => {

@@ -45,5 +45,14 @@ export const removeCardThunk = (cardId) => async (dispatch) => {
   }
 };
 
+export const likeCardThunk = (card, isLiked) => async (dispatch) => {
+  try {
+    const newCard = await api.toggleLikes(card._id, isLiked);
+    dispatch(likeCard(newCard));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const { setCards, addCard, removeCard, likeCard } = cardsSlice.actions;
 export default cardsSlice.reducer;
