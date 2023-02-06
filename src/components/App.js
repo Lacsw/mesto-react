@@ -7,13 +7,13 @@ import Main from './Main';
 import ImagePopup from './ImagePopup';
 
 import api from '../utils/api';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ConfirmDeletePopup from './ConfirmDeletePopup';
 
 import { setCardsThunk, addCardThunk } from '../store/reducers/cardsSlice';
+import { setUserInfo } from '../store/reducers/userSlice';
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -22,7 +22,6 @@ function App() {
   const [isConfimDeletePopupOpen, setConfimDeletePopupOpen] = useState(false);
   const [deletedCard, setDeletedCard] = useState({});
   const [selectedCard, setSelectedCard] = useState({});
-  const [currentUser, setCurrentUser] = useState({});
 
   const dispatch = useDispatch();
 
@@ -56,38 +55,23 @@ function App() {
   }
 
   function handleUpdateUser(userInfo) {
-    api
-      .setUserInfo(userInfo)
-      .then((newUserInfo) => {
-        setCurrentUser(newUserInfo);
-        closeAllPopups();
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    api.setUserInfo(userInfo).then((newUserInfo) => {
+      dispatch(setUserInfo(newUserInfo));
+      closeAllPopups();
+    });
   }
 
   useEffect(() => {
-    api
-      .getUserInfo()
-      .then((userData) => {
-        setCurrentUser(userData);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
+    api.getUserInfo().then((userData) => {
+      dispatch(setUserInfo(userData));
+    });
+  }, [dispatch]);
 
   function handleUpdateAvatar(newAvatar) {
-    api
-      .updateAvatar(newAvatar)
-      .then((userData) => {
-        setCurrentUser(userData);
-        closeAllPopups();
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    api.updateAvatar(newAvatar).then((userData) => {
+      dispatch(setUserInfo(userData));
+      closeAllPopups();
+    });
   }
 
   //Действия с карточками
@@ -101,7 +85,7 @@ function App() {
   };
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <>
       <Header />
       <Main
         onEditProfile={handleEditProfileClick}
@@ -136,7 +120,7 @@ function App() {
       />
 
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-    </CurrentUserContext.Provider>
+    </>
   );
 }
 

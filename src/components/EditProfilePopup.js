@@ -1,12 +1,12 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import PopupWithForm from './PopupWithForm';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const currentUser = useContext(CurrentUserContext);
+  const currentUser = useSelector((state) => state.user.user);
 
   const handleNameChange = (e) => {
     setName(e.target.value);

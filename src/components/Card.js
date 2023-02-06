@@ -1,11 +1,10 @@
-import { useContext } from 'react';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { likeCardThunk } from '../store/reducers/cardsSlice';
 
 const Card = ({ card, onCardClick, onCardDelete }) => {
-  const currentUser = useContext(CurrentUserContext);
+  const currentUser = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
   const isOwn = card.owner._id === currentUser._id;

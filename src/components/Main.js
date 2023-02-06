@@ -1,7 +1,5 @@
-import { useContext } from 'react';
 import { useSelector } from 'react-redux';
 
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Card from './Card';
 
 function Main({
@@ -11,7 +9,7 @@ function Main({
   onCardClick,
   onCardDelete,
 }) {
-  const currentUser = useContext(CurrentUserContext);
+  const currentUser = useSelector((state) => state.user.user);
   const cards = useSelector((state) => state.cards.cards);
 
   return (
