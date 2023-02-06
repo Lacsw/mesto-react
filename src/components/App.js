@@ -13,11 +13,7 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ConfirmDeletePopup from './ConfirmDeletePopup';
 
-import {
-  setCardsThunk,
-  addCardThunk,
-  removeCardThunk,
-} from '../store/reducers/cardsSlice';
+import { setCardsThunk, addCardThunk } from '../store/reducers/cardsSlice';
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -99,12 +95,6 @@ function App() {
     dispatch(setCardsThunk());
   }, [dispatch]);
 
-  const handleCardDeleteSubmit = (card) => {
-    const cardId = card._id;
-    dispatch(removeCardThunk(cardId));
-    closeAllPopups();
-  };
-
   const handleAddPlaceSubmit = (card) => {
     dispatch(addCardThunk(card));
     closeAllPopups();
@@ -142,7 +132,6 @@ function App() {
       <ConfirmDeletePopup
         isOpen={isConfimDeletePopupOpen}
         onClose={closeAllPopups}
-        onCardDelete={handleCardDeleteSubmit}
         card={deletedCard}
       />
 

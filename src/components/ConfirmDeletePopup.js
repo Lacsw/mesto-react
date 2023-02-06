@@ -1,10 +1,16 @@
-import PopupWithForm from './PopupWithForm';
+import { useDispatch } from 'react-redux';
 
-const ConfirmDeletePopup = ({isOpen, onClose, onCardDelete, card}) => {
+import PopupWithForm from './PopupWithForm';
+import { removeCardThunk } from '../store/reducers/cardsSlice';
+
+const ConfirmDeletePopup = ({ isOpen, onClose, card }) => {
+  const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    onCardDelete(card);
-  }
+    dispatch(removeCardThunk(card._id));
+    onClose();
+  };
 
   return (
     <PopupWithForm
