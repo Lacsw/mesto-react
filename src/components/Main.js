@@ -9,7 +9,6 @@ function Main({
   onEditProfile,
   onAddPlace,
   onCardClick,
-  onCardLike,
   onCardDelete,
 }) {
   const currentUser = useContext(CurrentUserContext);
@@ -50,7 +49,6 @@ function Main({
             key={card._id}
             card={card}
             onCardClick={onCardClick}
-            onCardLike={onCardLike}
             onCardDelete={onCardDelete}
           />
         ))}

@@ -1,9 +1,12 @@
 import { useContext } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { likeCardThunk } from '../store/reducers/cardsSlice';
 
-const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
+const Card = ({ card, onCardClick, onCardDelete }) => {
   const currentUser = useContext(CurrentUserContext);
+  const dispatch = useDispatch();
 
   const isOwn = card.owner._id === currentUser._id;
 
@@ -13,7 +16,7 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
   }`;
 
   function handleLikeClick() {
-    onCardLike(card);
+    dispatch(likeCardThunk(card, isLiked));
   }
 
   function handleClick() {
