@@ -26,5 +26,10 @@ export const setUserThunk = (userInfo) => async (dispatch) => {
   dispatch(setUserInfo(newUserInfo));
 };
 
+export const updateAvatarThunk = (link) => async (dispatch) => {
+  const newUserInfo = await api.updateAvatar(link);
+  dispatch(setUserInfo(newUserInfo));
+};
+
 export const { setUserInfo } = userSlice.actions;
 export default userSlice.reducer;

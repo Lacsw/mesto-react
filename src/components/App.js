@@ -6,7 +6,6 @@ import Header from './Header';
 import Main from './Main';
 import ImagePopup from './ImagePopup';
 
-import api from '../utils/api';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
@@ -14,8 +13,8 @@ import ConfirmDeletePopup from './ConfirmDeletePopup';
 
 import { setCardsThunk, addCardThunk } from '../store/reducers/cardsSlice';
 import {
+  updateAvatarThunk,
   getUserInfoThunk,
-  setUserInfo,
   setUserThunk,
 } from '../store/reducers/userSlice';
 
@@ -68,11 +67,9 @@ function App() {
     closeAllPopups();
   }
 
-  function handleUpdateAvatar(newAvatar) {
-    api.updateAvatar(newAvatar).then((userData) => {
-      dispatch(setUserInfo(userData));
-      closeAllPopups();
-    });
+  function handleUpdateAvatar(link) {
+    dispatch(updateAvatarThunk(link));
+    closeAllPopups();
   }
 
   //Действия с карточками
@@ -89,11 +86,11 @@ function App() {
     <>
       <Header />
       <Main
+        name="place-name"
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
         onEditAvatar={handleEditAvatarClick}
         onCardClick={handleCardClick}
-        name="place-name"
         onCardDelete={handleRemoveCardBtnClick}
       />
       <Footer />
