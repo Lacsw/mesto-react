@@ -13,7 +13,11 @@ import AddPlacePopup from './AddPlacePopup';
 import ConfirmDeletePopup from './ConfirmDeletePopup';
 
 import { setCardsThunk, addCardThunk } from '../store/reducers/cardsSlice';
-import { setUserInfo } from '../store/reducers/userSlice';
+import {
+  getUserInfoThunk,
+  setUserInfo,
+  setUserThunk,
+} from '../store/reducers/userSlice';
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -54,18 +58,15 @@ function App() {
     setSelectedCard({});
   }
 
-  function handleUpdateUser(userInfo) {
-    api.setUserInfo(userInfo).then((newUserInfo) => {
-      dispatch(setUserInfo(newUserInfo));
-      closeAllPopups();
-    });
-  }
-
+  //Действия с пользователем
   useEffect(() => {
-    api.getUserInfo().then((userData) => {
-      dispatch(setUserInfo(userData));
-    });
+    dispatch(getUserInfoThunk());
   }, [dispatch]);
+
+  function handleUpdateUser(userInfo) {
+    dispatch(setUserThunk(userInfo));
+    closeAllPopups();
+  }
 
   function handleUpdateAvatar(newAvatar) {
     api.updateAvatar(newAvatar).then((userData) => {
