@@ -23,8 +23,8 @@ function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [isConfimDeletePopupOpen, setConfimDeletePopupOpen] = useState(false);
-  const [deletedCard, setDeletedCard] = useState({});
-  const [selectedCard, setSelectedCard] = useState({});
+  const [deletedCard, setDeletedCard] = useState(null);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -54,7 +54,7 @@ function App() {
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
     setConfimDeletePopupOpen(false);
-    setSelectedCard({});
+    setSelectedCard(null);
   }
 
   //Действия с пользователем
